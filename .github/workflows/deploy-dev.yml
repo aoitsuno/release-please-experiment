@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-      - run: echo "deploy ${{ github.sha }} to dev"
+      - run: echo "deploy ${{ github.sha }} to dev!"
