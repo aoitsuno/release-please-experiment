@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.2.0...release-please-experiment-v1.3.0) (2026-10-09)
+
+
+### Features
+
+* hello 7 ([#11](https://github.com/aoitsuno/release-please-experiment/issues/11)) ([2fa7d1c](https://github.com/aoitsuno/release-please-experiment/commit/2fa7d1c53f80240b308058cd17c1e748b103fe43))
+
+
+### Bug Fixes
+
+* hotfix の修正 ([33c3686](https://github.com/aoitsuno/release-please-experiment/commit/33c3686ac8dd6af9cd740b91e4b80aad172ab3d1))
+
 ## [1.2.0](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.1.0...release-please-experiment-v1.2.0) (2026-10-09)
 
 
