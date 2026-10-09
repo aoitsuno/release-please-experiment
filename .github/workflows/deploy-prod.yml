@@ -50,3 +50,33 @@ jobs:
     environment: prod
     steps:
       - run: echo "deploy ${{ inputs.tag }} to prod"
+
+  backport:
+    needs: deploy
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ inputs.tag }}
+      GH_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN }}   # GITHUB_TOKEN だと PR の ci が承認待ちになる
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+      - name: hotfix の fix を main へ戻す PR を作る
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tag_sha=$(git rev-list -n1 "refs/tags/${TAG}")
+          if git merge-base --is-ancestor "$tag_sha" origin/main; then
+            echo "${TAG} は main に含まれている（通常リリース）。backport は不要"; exit 0
+          fi
+          base=$(git merge-base "$tag_sha" origin/main)
+          # hotfix ブランチ上の fix だけを拾う（release-please の release コミットは除く）
+          picks=$(git rev-list --reverse "${base}..${tag_sha}" --grep='^chore(.*): release' --invert-grep)
+          [ -n "$picks" ] || { echo "拾うコミットが無い"; exit 0; }
+          git switch -c "backport/${TAG}" origin/main
+          git cherry-pick $picks
+          git push -u origin "backport/${TAG}"
+          gh pr create --base main --head "backport/${TAG}" \
+            --title "fix: ${TAG} の hotfix を main に反映" \
+            --body "deploy-prod で ${TAG} を本番に配備したので、hotfix の修正を main に戻します。"
