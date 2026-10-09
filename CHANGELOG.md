@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.3.0...release-please-experiment-v1.3.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* hotfix の修正 ([#18](https://github.com/aoitsuno/release-please-experiment/issues/18)) ([461a5d2](https://github.com/aoitsuno/release-please-experiment/commit/461a5d2b6acb59a5f4d74893d66edcff8a39fe51))
+
 ## [1.3.0](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.2.0...release-please-experiment-v1.3.0) (2026-10-09)
 
 
