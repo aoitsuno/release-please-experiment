@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.2](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.5.1...release-please-experiment-v1.5.2) (2026-10-09)
+
+
+### Bug Fixes
+
+* fix a（main 側） ([#28](https://github.com/aoitsuno/release-please-experiment/issues/28)) ([4215438](https://github.com/aoitsuno/release-please-experiment/commit/42154389803377d47f581c5500a3da4a3bafc746))
+* README を追加 ([#22](https://github.com/aoitsuno/release-please-experiment/issues/22)) ([#25](https://github.com/aoitsuno/release-please-experiment/issues/25)) ([eb71ee9](https://github.com/aoitsuno/release-please-experiment/commit/eb71ee95f84ed45479d0ba1cd38ecd9237689483))
+
 ## [1.5.1](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.5.0...release-please-experiment-v1.5.1) (2026-10-09)
 
 
