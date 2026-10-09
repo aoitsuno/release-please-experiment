@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.5.0...release-please-experiment-v1.5.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* fix b（hotfix 側） ([#27](https://github.com/aoitsuno/release-please-experiment/issues/27)) ([5670231](https://github.com/aoitsuno/release-please-experiment/commit/5670231691d1770f18b8f7f407993990ca82877a))
+
 ## [1.5.0](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.4.0...release-please-experiment-v1.5.0) (2026-10-09)
 
 
