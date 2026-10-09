@@ -16,7 +16,7 @@ jobs:
       - uses: googleapis/release-please-action@v5
         id: rp
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}    # 手順 8 で secrets.RELEASE_PLEASE_TOKEN に替える
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
           target-branch: ${{ github.ref_name }}   # hotfix ブランチでも同じ workflow を使う
