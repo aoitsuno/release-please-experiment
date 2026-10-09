@@ -75,8 +75,21 @@ jobs:
           picks=$(git rev-list --reverse "${base}..${tag_sha}" --grep='^chore(.*): release' --invert-grep)
           [ -n "$picks" ] || { echo "拾うコミットが無い"; exit 0; }
           git switch -c "backport/${TAG}" origin/main
-          git cherry-pick $picks
+          conflicted=""
+          for c in $picks; do
+            if ! git cherry-pick "$c"; then
+              conflicted="${conflicted} $(git diff --name-only --diff-filter=U | tr '\n' ' ')"
+              git add -A
+              GIT_EDITOR=true git cherry-pick --continue   # 衝突マーカー入りのままコミットし、PR 上で解決してもらう
+            fi
+          done
           git push -u origin "backport/${TAG}"
-          gh pr create --base main --head "backport/${TAG}" \
-            --title "fix: ${TAG} の hotfix を main に反映" \
-            --body "deploy-prod で ${TAG} を本番に配備したので、hotfix の修正を main に戻します。"
+          if [ -n "$conflicted" ]; then
+            gh pr create --draft --base main --head "backport/${TAG}" \
+              --title "fix: ${TAG} の hotfix を main に反映（要コンフリクト解決）" \
+              --body "deploy-prod で ${TAG} を本番に配備しました。cherry-pick が衝突したので、次のファイルの衝突マーカーを手で解決してから Draft を外してください:${conflicted}"
+          else
+            gh pr create --base main --head "backport/${TAG}" \
+              --title "fix: ${TAG} の hotfix を main に反映" \
+              --body "deploy-prod で ${TAG} を本番に配備したので、hotfix の修正を main に戻します。"
+          fi
