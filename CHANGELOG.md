@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.4.0...release-please-experiment-v1.4.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* README を追加 ([#22](https://github.com/aoitsuno/release-please-experiment/issues/22)) ([146efff](https://github.com/aoitsuno/release-please-experiment/commit/146efff1127021e5a2d3440da3dcb516c3fa05ec))
+
 ## [1.4.0](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.3.0...release-please-experiment-v1.4.0) (2026-10-09)
 
 
