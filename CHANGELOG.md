@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.4.0...release-please-experiment-v1.5.0) (2026-10-09)
+
+
+### Features
+
+* hello 9 ([#21](https://github.com/aoitsuno/release-please-experiment/issues/21)) ([93f1c55](https://github.com/aoitsuno/release-please-experiment/commit/93f1c55cdf71b6ee8d1f4c8298b3ade93f244177))
+
 ## [1.4.0](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.3.0...release-please-experiment-v1.4.0) (2026-10-09)
 
 
