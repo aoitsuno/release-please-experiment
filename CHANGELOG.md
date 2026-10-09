@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.3.0...release-please-experiment-v1.4.0) (2026-10-09)
+
+
+### Features
+
+* backport ([#15](https://github.com/aoitsuno/release-please-experiment/issues/15)) ([1a324e6](https://github.com/aoitsuno/release-please-experiment/commit/1a324e64684dc1d85bb81a2df5c8e82be1004afa))
+* hello 8 ([#16](https://github.com/aoitsuno/release-please-experiment/issues/16)) ([7c6698b](https://github.com/aoitsuno/release-please-experiment/commit/7c6698ba94aaf1ec7bf4559cc11b3469c25e00cd))
+
 ## [1.3.0](https://github.com/aoitsuno/release-please-experiment/compare/release-please-experiment-v1.2.0...release-please-experiment-v1.3.0) (2026-10-09)
 
 
