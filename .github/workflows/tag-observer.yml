@@ -1,0 +1,9 @@
+name: tag-observer
+on:
+  push:
+    tags: ['v*']
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "tag ${{ github.ref_name }} の push で起動した"

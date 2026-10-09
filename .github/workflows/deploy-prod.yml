@@ -1,0 +1,52 @@
+name: deploy-prod
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: '配備するタグ（例 v1.1.0）'
+        required: true
+        type: string
+      confirmation:
+        description: '本番に配備することを確認した'
+        type: boolean
+        default: false
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: read
+    env:
+      TAG: ${{ inputs.tag }}
+    steps:
+      - name: ① 確認チェック
+        run: |
+          [ "${{ inputs.confirmation }}" = "true" ] || { echo "::error::確認チェックが必要です"; exit 1; }
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: ② タグが存在するか
+        run: |
+          git rev-parse -q --verify "refs/tags/${TAG}^{commit}" >/dev/null \
+            || { echo "::error::タグ ${TAG} がありません"; exit 1; }
+      - name: ③ qa の最新の成功 deployment と同じ sha か
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          qa_sha=""
+          for id in $(gh api "repos/${GITHUB_REPOSITORY}/deployments?environment=qa&per_page=10" --jq '.[].id'); do
+            state=$(gh api "repos/${GITHUB_REPOSITORY}/deployments/${id}/statuses?per_page=1" --jq '.[0].state')
+            if [ "$state" = "success" ]; then
+              qa_sha=$(gh api "repos/${GITHUB_REPOSITORY}/deployments/${id}" --jq .sha); break
+            fi
+          done
+          tag_sha=$(git rev-list -n1 "refs/tags/${TAG}")
+          echo "qa=${qa_sha} tag=${tag_sha}"
+          [ -n "$qa_sha" ] && [ "$qa_sha" = "$tag_sha" ] \
+            || { echo "::error::${TAG} は qa に配備した版と違います"; exit 1; }
+  deploy:
+    needs: guard
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - run: echo "deploy ${{ inputs.tag }} to prod"

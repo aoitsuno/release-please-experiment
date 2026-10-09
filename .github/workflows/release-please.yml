@@ -1,0 +1,29 @@
+name: release-please
+on:
+  push:
+    branches: [main, 'hotfix/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.rp.outputs.release_created }}
+      tag_name: ${{ steps.rp.outputs.tag_name }}
+    steps:
+      - uses: googleapis/release-please-action@v5
+        id: rp
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}    # 手順 8 で secrets.RELEASE_PLEASE_TOKEN に替える
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          target-branch: ${{ github.ref_name }}   # hotfix ブランチでも同じ workflow を使う
+  deploy-qa:
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    runs-on: ubuntu-latest
+    environment: qa                                # required reviewer で止まる。deployment 記録が残る
+    steps:
+      - run: echo "deploy ${{ needs.release-please.outputs.tag_name }} to qa"

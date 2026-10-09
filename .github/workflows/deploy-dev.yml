@@ -1,0 +1,10 @@
+name: deploy-dev
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - run: echo "deploy ${{ github.sha }} to dev"
